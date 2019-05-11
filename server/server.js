@@ -11,7 +11,7 @@ app.get('/whiskeys', (req, res) => {
     Whiskey.find().then((whiskeys) => {
         res.send({whiskeys});
     }, (err) => {
-        res.status(400).send(e);
+        res.status(500).send(err);
     });
 });
 
