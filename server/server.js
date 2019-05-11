@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 app.get('/whiskeys', (req, res) => {
     Whiskey.find().then((whiskeys) => {
         res.send({whiskeys});
-    }, (err) => {
-        res.status(500).send(err);
-    });
+    }).catch((err) => {
+        res.status(err.status).send(err)
+    })
 });
 
 /*app.post('/whiskeys', (req, res) => {
