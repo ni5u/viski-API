@@ -11,9 +11,20 @@ app.get('/whiskeys', (req, res) => {
     Whiskey.find().then((whiskeys) => {
         res.send({whiskeys});
     }).catch((err) => {
-        res.status(err.status).send(err)
+        res.status(err.status).send(err);
     })
 });
+
+app.get('/whiskeys/:maker', (req,res) => {
+    var maker = req.params.maker;
+
+    Whiskey.find({valmistaja: maker})
+    .then((whiskeys) => {
+        res.send({whiskeys});
+    }).catch((err) => {
+        res.status(err.status).send(err);
+    })
+})
 
 /*app.post('/whiskeys', (req, res) => {
     
