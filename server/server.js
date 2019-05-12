@@ -19,7 +19,7 @@ app.get('/whiskeys', (req, res) => {
     })
 });
 
-app.get('/whiskeys/:maker', (req,res) => {
+app.get('/whiskeys/maker/:maker', (req,res) => {
     var maker = req.params.maker;
     Whiskey.find({valmistaja: maker})
     .then((whiskeys) => {
@@ -29,9 +29,36 @@ app.get('/whiskeys/:maker', (req,res) => {
     })
 })
 
-app.get('/whiskeys/:maa', (req,res) => {
+app.get('/whiskeys/name/:nimi', (req, res) =>{
+    var nimi = req.params.nimi;
+    Whiskey.find({nimi:{
+        $regex: nimi,
+        $options: "i"
+    }})
+    .then((whiskeys) => {
+        res.status(200).send({whiskeys});
+    }).catch((err) => {
+        handleError(res, err.message, "Failed to get whiskeys")
+    })
+})
+
+
+app.get('/whiskeys/country/:maa', (req,res) => {
     var maa = req.params.maa;
     Whiskey.find({valmistusmaa: maa})
+    .then((whiskeys) => {
+        res.status(200).send({whiskeys});
+    }).catch((err) => {
+        handleError(res, err.message, "Failed to get whiskeys")
+    })
+})
+
+app.get('/whiskeys/description/:desc', (req,res) => {
+    var desc = req.params.desc;
+    Whiskey.find({luonnehdinta:{
+        $regex: desc,
+        $options: "i"
+    }})
     .then((whiskeys) => {
         res.status(200).send({whiskeys});
     }).catch((err) => {
