@@ -11,8 +11,6 @@ function handleError(res, reason, message, code) {
     res.status(code || 500).json({"error": message});
   }
 
-app.use(bodyParser.json());
-
 app.get('/whiskeys', (req, res) => {
     Whiskey.find().then((whiskeys) => {
         res.status(200).send({whiskeys});
