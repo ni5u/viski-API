@@ -5,13 +5,19 @@ const port = process.env.PORT || 3050;
 var {Whiskey} = require('./models/whiskey');
 var app = express();
 
+// Generic error handler used by all endpoints.
+function handleError(res, reason, message, code) {
+    console.log("ERROR: " + reason);
+    res.status(code || 500).json({"error": message});
+  }
+
 app.use(bodyParser.json());
 
 app.get('/whiskeys', (req, res) => {
     Whiskey.find().then((whiskeys) => {
-        res.send({whiskeys});
+        res.status(200).send({whiskeys});
     }).catch((err) => {
-        res.status(err.status).send(err);
+        handleError(res, err.message, "Failed to get whiskeys")
     })
 });
 
@@ -20,9 +26,9 @@ app.get('/whiskeys/:maker', (req,res) => {
 
     Whiskey.find({valmistaja: maker})
     .then((whiskeys) => {
-        res.send({whiskeys});
+        res.status(200).send({whiskeys});
     }).catch((err) => {
-        res.status(err.status).send(err);
+        handleError(res, err.message, "Failed to get whiskeys")
     })
 })
 
