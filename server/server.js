@@ -12,6 +12,7 @@ function handleError(res, reason, message, code) {
   }
 
 app.get('/whiskeys', (req, res) => {
+    res.send("loading..")
     Whiskey.find().then((whiskeys) => {
         res.status(200).send({whiskeys});
     }).catch((err) => {
@@ -21,7 +22,7 @@ app.get('/whiskeys', (req, res) => {
 
 app.get('/whiskeys/:maker', (req,res) => {
     var maker = req.params.maker;
-
+    res.send("loading...")
     Whiskey.find({valmistaja: maker})
     .then((whiskeys) => {
         res.status(200).send({whiskeys});
