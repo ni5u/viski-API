@@ -29,6 +29,16 @@ app.get('/whiskeys/:maker', (req,res) => {
     })
 })
 
+app.get('/whiskeys/:maa', (req,res) => {
+    var maa = req.params.maa;
+    Whiskey.find({valmistusmaa: maa})
+    .then((whiskeys) => {
+        res.status(200).send({whiskeys});
+    }).catch((err) => {
+        handleError(res, err.message, "Failed to get whiskeys")
+    })
+})
+
 /*app.post('/whiskeys', (req, res) => {
     
     for(var i =0 ; i < req.body.viskit.length; i++){
