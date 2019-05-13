@@ -36,7 +36,7 @@ app.get('/whiskeys/name/:nimi', (req, res) =>{
         $options: "i"
     }})
     .then((whiskeys) => {
-        res.status(200).send({whiskeys});
+        res.status(200).send(whiskeys);
     }).catch((err) => {
         handleError(res, err.message, "Failed to get whiskeys")
     })
@@ -47,7 +47,7 @@ app.get('/whiskeys/country/:maa', (req,res) => {
     var maa = req.params.maa;
     Whiskey.find({valmistusmaa: maa})
     .then((whiskeys) => {
-        res.status(200).send({whiskeys});
+        res.status(200).send(whiskeys);
     }).catch((err) => {
         handleError(res, err.message, "Failed to get whiskeys")
     })
@@ -60,7 +60,7 @@ app.get('/whiskeys/description/:desc', (req,res) => {
         $options: "i"
     }})
     .then((whiskeys) => {
-        res.status(200).send({whiskeys});
+        res.status(200).send(whiskeys);
     }).catch((err) => {
         handleError(res, err.message, "Failed to get whiskeys")
     })
