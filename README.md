@@ -17,6 +17,6 @@ Nimen mukaan
 Maan mukaan
 /whiskeys/country/Suomi
 
-Kuvakusen mukaan
+Kuvauksen mukaan
 
 /whiskeys/description/savuinen
